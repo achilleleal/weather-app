@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import WeatherCard from './WeatherCard';
 import logo from './sun.svg';
 import './App.css';
+import 'tachyons';
 
 const key = "";
 
@@ -10,36 +12,43 @@ class App extends Component {
     super();
     this.state = {
       loaded: false,
+      unit: "metric", //Tells the API to fetch in this measurement system
+      weatherData: {}
     }
   }
 
-  getWeather = async () => {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=London&appid=${key}`)
+  getWeather = () => {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=Caracas&appid=${key}&units=${this.state.unit}`)
     .then(res => res.json())
-    .then(console.log)
-    .catch(console.log)
+    .then(data => {
+      console.log(data);
+      this.setState({weatherData: data, loaded: true})
+    })
+    .catch(console.log);
   }
 
   render() {
-    const {loaded} = this.state;
+    const { loaded, unit } = this.state;
+    const { name, weather, main } = this.state.weatherData;
     
     return (
       <div className="App">
         <header className="App-header">
           {loaded ? 
-            <h1>Weather</h1>
+              <WeatherCard name={name} weather={weather} main={main} unit={unit} />
             :
-            <>
-            <img src={logo} className="App-logo" alt="logo" />
-            <h2>Loading...</h2>
-            <button onClick={this.getWeather}>Get Weather</button>
-            </>
-            
+              <div>
+                <img src={logo} className="App-logo" alt="logo" />
+                <h2>Loading...</h2>
+                <button onClick={this.getWeather}>Get Weather</button>
+              </div>
           }
         </header>
       </div>
     );
   }
 }
+
+
 
 export default App;
