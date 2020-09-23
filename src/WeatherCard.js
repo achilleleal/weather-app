@@ -12,7 +12,7 @@ const WeatherCard = ({name, weather, main, unit}) => {
                 <h1>{name}</h1>
                 <img src={`https://api.openweathermap.org/img/w/${weather[0].icon}`} 
                      alt={weather[0].main}
-                     className="w2"/>
+                     className="w3"/>
                 <h2>{weather[0].main}</h2>
                 <p>{weather[0].description}</p>
             </div>

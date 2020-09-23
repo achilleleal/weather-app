@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import WeatherCard from './WeatherCard';
 import logo from './sun.svg';
 import './App.css';
-import 'tachyons';
+import './styles/style.css';
 
 const key = "";
 
@@ -39,7 +39,7 @@ class App extends Component {
             :
               <div>
                 <img src={logo} className="App-logo" alt="logo" />
-                <h2>Loading...</h2>
+                <h2 className="text-red-700">Loading...</h2>
                 <button onClick={this.getWeather}>Get Weather</button>
               </div>
           }
