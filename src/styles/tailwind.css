@@ -3,3 +3,8 @@
 @import "tailwindcss/components";
 
 @import "tailwindcss/utilities";
+
+/* Run "npm run postcss" every time a class is made in this file
+to rebuild the style.css with said class.
+ONLY use this file to make classes that @apply tailwind's classes,
+all other classes go in the App.css*/
