@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import Layout from './components/Layout';
 import WeatherCard from './components/WeatherCard';
 import sun from './svg/sun.svg';
-import './App.css';
+import './styles/App.css';
 import './styles/style.css';
 
-const key = "139c4bc5795ad3c59ec5c56668405534";
+const key = "";
 
 class App extends Component {
 
@@ -13,13 +13,14 @@ class App extends Component {
     super();
     this.state = {
       loaded: false,
+      city: 'Houston',
       unit: "metric", //Tells the API to fetch in this measurement system
       weatherData: {}
     }
   }
 
   getWeather = () => {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=Caracas&appid=${key}&units=${this.state.unit}`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=${key}&units=${this.state.unit}`)
     .then(res => res.json())
     .then(data => {
       console.log(data);
@@ -29,22 +30,19 @@ class App extends Component {
   }
 
   render() {
-    const { loaded, unit } = this.state;
-    const { name, weather, main } = this.state.weatherData;
+    const { loaded, unit, weatherData } = this.state;
     
     return (
-      <Layout className="App text-white">
-        <main className="App-header">
+      <Layout>
           {loaded ? 
-              <WeatherCard name={name} weather={weather} main={main} unit={unit} />
+              <WeatherCard data={weatherData} unit={unit} />
             :
               <div>
-                <img src={sun} className="App-logo" alt="sun" />
-                <h2 className="">Loading...</h2>
-                <button onClick={this.getWeather}>Get Weather</button>
+                <input type="text" placeholder="City name" className="p-2 rounded text-black"></input>
+                <img src={sun} className="loading my-6 mx-auto" alt="sun" />
+                <button className="bg-white text-black p-2 rounded-lg mt-6" onClick={this.getWeather}>Get Weather</button>
               </div>
           }
-        </main>
       </Layout>
     );
   }

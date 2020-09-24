@@ -15,7 +15,7 @@
     "tailwindcss": "^1.8.10"
   },
   "scripts": {
-    "start": "postcss && react-scripts start",
+    "start": "react-scripts start",
     "build": "NODE_ENV=production npm run postcss && react-scripts build",
     "postcss": "postcss src/styles/tailwind.css -o src/styles/style.css",
     "eject": "react-scripts eject"
