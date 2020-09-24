@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import WeatherCard from './WeatherCard';
-import logo from './sun.svg';
+import Layout from './components/Layout';
+import WeatherCard from './components/WeatherCard';
+import sun from './svg/sun.svg';
 import './App.css';
 import './styles/style.css';
 
-const key = "";
+const key = "139c4bc5795ad3c59ec5c56668405534";
 
 class App extends Component {
 
@@ -32,19 +33,19 @@ class App extends Component {
     const { name, weather, main } = this.state.weatherData;
     
     return (
-      <div className="App">
-        <header className="App-header">
+      <Layout className="App text-white">
+        <main className="App-header">
           {loaded ? 
               <WeatherCard name={name} weather={weather} main={main} unit={unit} />
             :
               <div>
-                <img src={logo} className="App-logo" alt="logo" />
-                <h2 className="text-red-700">Loading...</h2>
+                <img src={sun} className="App-logo" alt="sun" />
+                <h2 className="">Loading...</h2>
                 <button onClick={this.getWeather}>Get Weather</button>
               </div>
           }
-        </header>
-      </div>
+        </main>
+      </Layout>
     );
   }
 }
