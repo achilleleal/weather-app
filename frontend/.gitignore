@@ -2,7 +2,7 @@
 
 # this file is only for development, and will automatically generate on "npm start".
 # it contains all tailwind classes. A purged file will generate on build
-/src/style.css
+/src/styles/style.css
 
 # dependencies
 /node_modules
