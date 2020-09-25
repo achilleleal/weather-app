@@ -4,10 +4,9 @@
 
 @import "tailwindcss/utilities";
 
-/* Run "npm run postcss" every time a class is made in this file
-to rebuild the style.css with said class.
-ONLY use this file to make classes that @apply tailwind's classes,
-all other classes go in the App.css*/
+/* Run "npm run postcss" every time a change is made in this file to rebuild the style.css file.
+"npm start" will automatically build the classes before starting the dev server.
+ONLY use this file to make classes that @apply tailwind classes. All other classes go in the App.css*/
 
 .button {
     @apply px-4 py-2 mt-6 rounded-lg bg-white text-black duration-500 transform;
