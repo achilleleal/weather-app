@@ -8,3 +8,16 @@
 to rebuild the style.css with said class.
 ONLY use this file to make classes that @apply tailwind's classes,
 all other classes go in the App.css*/
+
+.button {
+    @apply px-4 py-2 mt-6 rounded-lg bg-white text-black duration-500 transform;
+}
+
+.button:hover {
+    @apply scale-105;
+}
+
+.card {
+    @apply bg-gradient-to-r from-blue-800 via-blue-700 to-blue-800
+    text-center border-solid border-2 border-blue-500 rounded p-8;
+}

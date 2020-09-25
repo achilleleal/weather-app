@@ -1,8 +1,9 @@
 import React from 'react'
+import rain from '../svg/rain.svg'
 
 let degree = "ºC";
 
-const WeatherCard = ({ data, unit }) => {
+const WeatherCard = ({ data, unit, toMenu }) => {
 
     if (data.id) {
 
@@ -21,7 +22,7 @@ const WeatherCard = ({ data, unit }) => {
         const capitalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1);
     
         return(
-            <div className="bg-blue-800 p-8 rounded">
+            <div className="card duration-500 transform hover:scale-105">
                 <div className="font-bold">
                     <h1 className="text-3xl sm:text-4xl lg:text-5xl border-b-4 border-solid border-blue-400" >{name}</h1>
                     <img src={`https://api.openweathermap.org/img/w/${weather[0].icon}`} 
@@ -37,9 +38,10 @@ const WeatherCard = ({ data, unit }) => {
         );
     } else {
         return(
-            <div className="text-center">
-                <h1>Oops, something went wrong</h1>
-                <button className="bg-white text-black p-2 rounded-lg mt-6">Try again</button>
+            <div className="card">
+                <h1 className="text-md sm:text-2xl">Oops, something went wrong</h1>
+                <img src={rain} alt="" className="w-8 sm:w-16 mx-auto" />
+                <button onClick={toMenu} className="button">Try again</button>
             </div>
         );
     }

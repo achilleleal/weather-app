@@ -18800,25 +18800,55 @@ video {
   animation: bounce 1s infinite;
 }
 
-.loading {
-  height: 20vmin;
-  pointer-events: none;
+/* Run "npm run postcss" every time a class is made in this file
+to rebuild the style.css with said class.
+ONLY use this file to make classes that @apply tailwind's classes,
+all other classes go in the App.css*/
+
+.button {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  border-radius: 0.5rem;
+  --bg-opacity: 1;
+  background-color: #fff;
+  background-color: rgba(255, 255, 255, var(--bg-opacity));
+  --text-opacity: 1;
+  color: #000;
+  color: rgba(0, 0, 0, var(--text-opacity));
+  transition-duration: 500ms;
+  --transform-translate-x: 0;
+  --transform-translate-y: 0;
+  --transform-rotate: 0;
+  --transform-skew-x: 0;
+  --transform-skew-y: 0;
+  --transform-scale-x: 1;
+  --transform-scale-y: 1;
+  transform: translateX(var(--transform-translate-x)) translateY(var(--transform-translate-y)) rotate(var(--transform-rotate)) skewX(var(--transform-skew-x)) skewY(var(--transform-skew-y)) scaleX(var(--transform-scale-x)) scaleY(var(--transform-scale-y));
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .loading {
-    animation: loading-spin infinite 10s linear;
-  }
+.button:hover {
+  --transform-scale-x: 1.05;
+  --transform-scale-y: 1.05;
 }
 
-@keyframes loading-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+.card {
+  background-image: linear-gradient(to right, var(--gradient-color-stops));
+  --gradient-from-color: #2c5282;
+  --gradient-color-stops: var(--gradient-from-color), var(--gradient-to-color, rgba(44, 82, 130, 0));
+  --gradient-via-color: #2b6cb0;
+  --gradient-color-stops: var(--gradient-from-color), var(--gradient-via-color), var(--gradient-to-color, rgba(43, 108, 176, 0));
+  --gradient-to-color: #2c5282;
+  text-align: center;
+  border-style: solid;
+  border-width: 2px;
+  --border-opacity: 1;
+  border-color: #4299e1;
+  border-color: rgba(66, 153, 225, var(--border-opacity));
+  border-radius: 0.25rem;
+  padding: 2rem;
 }
 
 @media (min-width: 640px) {

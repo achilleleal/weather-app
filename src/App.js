@@ -19,6 +19,10 @@ class App extends Component {
     }
   }
 
+  toMenu = () => {
+    this.setState({loaded: false})
+  }
+
   getWeather = () => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=${key}&units=${this.state.unit}`)
     .then(res => res.json())
@@ -35,12 +39,12 @@ class App extends Component {
     return (
       <Layout>
           {loaded ? 
-              <WeatherCard data={weatherData} unit={unit} />
+              <WeatherCard data={weatherData} unit={unit} toMenu={this.toMenu} />
             :
               <div>
-                <input type="text" placeholder="City name" className="p-2 rounded text-black"></input>
+                <input type="text" placeholder="City name" className="p-2 rounded text-black text-center"></input>
                 <img src={sun} className="loading my-6 mx-auto" alt="sun" />
-                <button className="bg-white text-black p-2 rounded-lg mt-6" onClick={this.getWeather}>Get Weather</button>
+                <button className="button" onClick={this.getWeather}>Get Weather</button>
               </div>
           }
       </Layout>
