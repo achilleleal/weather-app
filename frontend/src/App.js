@@ -11,26 +11,29 @@ class App extends Component {
     super();
     this.state = {
       loaded: false,
-      city: 'Houston',
-      unit: "metric", //Tells the API to fetch in this measurement system
+      city: '',
       weatherData: {}
     }
   }
 
   toMenu = () => {
-    this.setState({loaded: false})
+    this.setState({loaded: false, city: ''})
   }
 
-  getWeather = async () => {
-    const data = await fetch('localhost:3000/');
-    console.log(data);
-    // fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=${key}&units=${this.state.unit}`)
-    // .then(res => res.json())
-    // .then(data => {
-    //   console.log(data);
-    //   this.setState({weatherData: data, loaded: true})
-    // })
-    // .catch(console.log);
+  getWeather = () => {
+    fetch('http://localhost:3000/weather', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        city: this.state.city
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      this.setState({weatherData: data, loaded: true})
+    })
+    .catch(err => console.log(err));
   }
 
   render() {
@@ -42,7 +45,7 @@ class App extends Component {
               <WeatherCard data={weatherData} unit={unit} toMenu={this.toMenu} />
             :
               <div>
-                <input type="text" placeholder="City name" className="p-2 rounded text-black text-center"></input>
+                <input type="text" onChange={(event) => this.setState({city: event.target.value})} placeholder="City name" className="p-2 rounded text-black text-center"></input>
                 <img src={sun} className="loading my-6 mx-auto" alt="sun" />
                 <button className="button" onClick={this.getWeather}>Get Weather</button>
               </div>
