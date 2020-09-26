@@ -21,7 +21,7 @@ class App extends Component {
   }
 
   getWeather = () => {
-    fetch('http://localhost:3000/weather', {
+    fetch('https://weather-apiserver.herokuapp.com/weather', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

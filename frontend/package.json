@@ -18,6 +18,7 @@
     "start": "npm run postcss && react-scripts start",
     "build": "NODE_ENV=production npm run postcss && react-scripts build",
     "postcss": "postcss src/styles/tailwind.css -o src/styles/style.css",
+    "deploy": "gh-pages -d dist",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -34,5 +35,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.1.0"
   }
 }
