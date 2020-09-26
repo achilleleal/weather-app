@@ -5,8 +5,6 @@ import sun from './svg/sun.svg';
 import './styles/App.css';
 import './styles/style.css';
 
-const key = "";
-
 class App extends Component {
 
   constructor() {
@@ -23,14 +21,16 @@ class App extends Component {
     this.setState({loaded: false})
   }
 
-  getWeather = () => {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=${key}&units=${this.state.unit}`)
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      this.setState({weatherData: data, loaded: true})
-    })
-    .catch(console.log);
+  getWeather = async () => {
+    const data = await fetch('localhost:3000/');
+    console.log(data);
+    // fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.city}&appid=${key}&units=${this.state.unit}`)
+    // .then(res => res.json())
+    // .then(data => {
+    //   console.log(data);
+    //   this.setState({weatherData: data, loaded: true})
+    // })
+    // .catch(console.log);
   }
 
   render() {
