@@ -18,8 +18,8 @@
   "scripts": {
     "start": "npm run tailwind && react-scripts start",
     "build": "npm run purge && react-scripts build",
-    "purge": "NODE_ENV=production postcss src/styles/tailwind.css -o src/styles/purged.css",
-    "tailwind": "postcss src/styles/tailwind.css -o src/styles/dev.css",
+    "purge": "NODE_ENV=production npm run tailwind",
+    "tailwind": "postcss src/styles/tailwind.css -o src/styles/styles.css",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"

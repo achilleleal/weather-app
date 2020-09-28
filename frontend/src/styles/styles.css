@@ -716,8 +716,10 @@ video {
   }
 }
 
-/* Run "npm run postcss" every time a change is made in this file to rebuild the style.css file.
+/* Run "npm run tailwind" every time a change is made in this file to rebuild the dev.css file.
 "npm start" will automatically build the classes before starting the dev server.
+The dev.css file is only for production, an is ignored by git. 
+When running "build" or "purge" a purged version of dev.css is made for deployment.
 ONLY use this file to make classes that @apply tailwind classes. All other classes go in the App.css*/
 
 .button {
