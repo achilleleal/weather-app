@@ -1,5 +1,9 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# this file is only for development, and will automatically generate on "npm start".
+# it contains all tailwind classes. A purged file will generate on build
+/src/styles/styles.css
+
 # dependencies
 /node_modules
 /.pnp
