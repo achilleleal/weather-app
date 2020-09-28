@@ -1,5 +1,5 @@
 {
-  "homepage": "https://achilleleal.github.io/weather-app",
+  "homepage": "https://achilleleal.github.io/weather-app/",
   "name": "weather-app",
   "version": "0.1.0",
   "private": true,
@@ -16,9 +16,11 @@
     "tailwindcss": "^1.8.10"
   },
   "scripts": {
-    "start": "npm run postcss && react-scripts start",
-    "build": "NODE_ENV=production npm run postcss && react-scripts build",
-    "postcss": "postcss src/styles/tailwind.css -o src/styles/style.css",
+    "start": "npm run tailwind && react-scripts start",
+    "build": "npm run purge && react-scripts build",
+    "purge": "NODE_ENV=production postcss src/styles/tailwind.css -o src/styles/purged.css",
+    "tailwind": "postcss src/styles/tailwind.css -o src/styles/dev.css",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },

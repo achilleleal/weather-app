@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import Layout from './components/Layout';
 import WeatherCard from './components/WeatherCard';
 import sun from './svg/sun.svg';
+import './styles/purged.css'
 import './styles/App.css';
-import './styles/style.css';
+import './styles/dev.css';
 
 class App extends Component {
 
