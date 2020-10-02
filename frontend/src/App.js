@@ -12,40 +12,44 @@ class App extends Component {
     this.state = {
       loaded: false,
       city: '',
-      weatherData: {}
+      weatherData: {},
     }
   }
 
   toMenu = () => {
-    this.setState({loaded: false, city: ''})
+    this.setState({loaded: false})
   }
 
   getWeather = () => {
-    fetch('https://weather-apiserver.herokuapp.com/weather', {
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        city: this.state.city
+    if (this.state.city.trim()) {
+      fetch('https://weather-apiserver.herokuapp.com/weather', {
+        method: 'post',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          city: this.state.city
+        })
       })
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      this.setState({weatherData: data, loaded: true})
-    })
-    .catch(err => console.log(err));
+      .then(res => res.json())
+      .then(data => {
+        this.setState({weatherData: data, loaded: true})
+      })
+      .catch(err => console.log(err));
+    }
   }
 
   render() {
-    const { loaded, unit, weatherData } = this.state;
+    const { loaded, weatherData } = this.state;
     
     return (
       <Layout>
           {loaded ? 
-              <WeatherCard data={weatherData} unit={unit} toMenu={this.toMenu} />
+              <WeatherCard data={weatherData} toMenu={this.toMenu} />
             :
               <div>
-                <input type="text" onChange={(event) => this.setState({city: event.target.value})} placeholder="City name" className="p-2 rounded text-black text-center"></input>
+                {this.state.city ? '' :
+                  <p className="text-blue-700 mb-1">Please enter a city</p>
+                }
+                <input type="text" value={this.state.city} onChange={(event) => this.setState({city: event.target.value})} placeholder="City name" className="p-2 rounded text-black text-center" />
                 <img src={sun} className="loading my-6 mx-auto" alt="sun" />
                 <button className="button" onClick={this.getWeather}>Get Weather</button>
               </div>
