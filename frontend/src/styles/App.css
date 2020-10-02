@@ -1,10 +1,11 @@
 body {
   font-family: Epilogue,'Baloo Tammudu 2';
-  background: linear-gradient(to top, #7F7FD5, #86A8E7, #91EAE4);
+  background: #7F7FD5;
 }
 
 main {
   height: 90vh;
+  background: linear-gradient(to top, #7F7FD5, #86A8E7, #91EAE4);
 }
 
 .loading {

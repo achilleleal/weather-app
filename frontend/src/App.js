@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Layout from './components/Layout';
+import Footer from './components/Footer';
 import WeatherCard from './components/WeatherCard';
 import sun from './svg/sun.svg';
 import './styles/App.css';
@@ -41,20 +41,22 @@ class App extends Component {
     const { loaded, weatherData } = this.state;
     
     return (
-      <Layout>
-          {loaded ? 
-              <WeatherCard data={weatherData} toMenu={this.toMenu} />
-            :
-              <div>
-                {this.state.city ? '' :
-                  <p className="text-blue-700 mb-1">Please enter a city</p>
-                }
-                <input type="text" value={this.state.city} onChange={(event) => this.setState({city: event.target.value})} placeholder="City name" className="p-2 rounded text-black text-center" />
-                <img src={sun} className="loading my-6 mx-auto" alt="sun" />
-                <button className="button" onClick={this.getWeather}>Get Weather</button>
-              </div>
-          }
-      </Layout>
+      <>
+        <main className="text-center text-white">
+          <div>
+            {loaded ? 
+                <WeatherCard data={weatherData} toMenu={this.toMenu} />
+              :
+                <div>
+                  <input type="text" value={this.state.city} onChange={(event) => this.setState({city: event.target.value})} placeholder="Enter a city name" className="py-2 px-4 rounded text-black text-center" />
+                  <img src={sun} className="loading my-6 mx-auto" alt="" />
+                  <button className="button" onClick={this.getWeather}>Get Weather</button>
+                </div>
+            }
+          </div>
+        </main>
+        <Footer />
+      </>
     );
   }
 }

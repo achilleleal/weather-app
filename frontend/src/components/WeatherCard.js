@@ -26,7 +26,7 @@ const WeatherCard = ({ data, toMenu }) => {
     
         return(
             <div>
-                <div className="card duration-500 transform hover:scale-105">
+                <div className="card">
                     <div className="font-bold">
                         <h1 className="text-3xl sm:text-4xl lg:text-5xl border-b-4 border-solid border-blue-400" >{name}</h1>
                         <img src={`https://api.openweathermap.org/img/w/${weather[0].icon}`} 
@@ -39,17 +39,22 @@ const WeatherCard = ({ data, toMenu }) => {
                         <h3 className="text-md sm:text-xl">{roundTemp(temp)} {degree}, feels like {roundTemp(feels_like)} {degree}</h3>
                     </div>
                 </div>
-                <button onClick={toMenu} className="button">To menu</button>
+                <div>
+                    <button onClick={toMenu} className="button">To menu</button>
+                </div>
             </div>
         );
 
     } else {
         return(
-            <div className="card">
-                <h1 className="text-md sm:text-2xl">Oops, something went wrong</h1>
-                <img src={rain} alt="" className="w-8 sm:w-16 mx-auto" />
+            <div>
+                <div className="card">
+                    <h1 className="text-md sm:text-2xl">Oops, something went wrong</h1>
+                    <img src={rain} alt="" className="w-8 sm:w-16 mx-auto" />
+                </div>
                 <button onClick={toMenu} className="button">Try again</button>
             </div>
+            
         );
     }
 }
