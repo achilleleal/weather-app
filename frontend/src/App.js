@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Footer from './components/Footer';
 import WeatherCard from './components/WeatherCard';
+import ErrorCard from './components/ErrorCard';
 import sun from './svg/sun.svg';
 import './styles/App.css';
 import './styles/styles.css';
@@ -45,13 +46,17 @@ class App extends Component {
         <main className="text-center text-white">
           <div>
             {loaded ? 
-                <WeatherCard data={weatherData} toMenu={this.toMenu} />
-              :
-                <div>
-                  <input type="text" value={this.state.city} onChange={(event) => this.setState({city: event.target.value})} placeholder="Enter a city name" className="py-2 px-4 rounded text-black text-center" />
-                  <img src={sun} className="loading my-6 mx-auto" alt="" />
-                  <button className="button" onClick={this.getWeather}>Get Weather</button>
-                </div>
+                      (weatherData.id ? 
+                        <WeatherCard data={weatherData} toMenu={this.toMenu} />
+                          :
+                        <ErrorCard toMenu={this.toMenu} />
+                        )
+                    :
+                      <div>
+                        <input type="text" value={this.state.city} onChange={(event) => this.setState({city: event.target.value})} placeholder="Enter a city name" className="py-2 px-4 rounded text-black text-center" />
+                        <img src={sun} className="loading my-6 mx-auto" alt="" />
+                        <button className="button" onClick={this.getWeather}>Get Weather</button>
+                      </div>
             }
           </div>
         </main>
