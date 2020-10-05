@@ -19,8 +19,12 @@ ONLY use this file to make classes that @apply tailwind classes. All other class
 }
 
 .card {
-    @apply bg-gradient-to-r from-blue-800 via-blue-700 to-blue-800
-    text-center border-solid border-2 border-blue-500 rounded p-8;
+    @apply bg-white text-center rounded p-2;
+    width: 60vw;
+}
+
+.card-item {
+    @apply bg-gradient-to-b from-purple-900 to-indigo-600 rounded;
 }
 
 main > div {

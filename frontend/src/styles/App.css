@@ -1,5 +1,5 @@
 body {
-  font-family: Epilogue,'Baloo Tammudu 2';
+  font-family: Epilogue,'Baloo Tammudu 2', Cambria;
   background: #7F7FD5;
 }
 
@@ -9,7 +9,8 @@ main {
 }
 
 .loading {
-  height: 20vmin;
+  height: 15vw;
+  min-height: 200px;
   pointer-events: none;
 }
 
