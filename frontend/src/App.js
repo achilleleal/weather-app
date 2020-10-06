@@ -6,6 +6,8 @@ import sun from './svg/sun.svg';
 import './styles/App.css';
 import './styles/styles.css';
 
+// Link where the server is running.
+const SERVER = "http://localhost:3000"
 class App extends Component {
 
   constructor() {
@@ -23,7 +25,7 @@ class App extends Component {
 
   getWeather = () => {
     if (this.state.city.trim()) {
-      fetch('https://weather-apiserver.herokuapp.com/weather', {
+      fetch(`${SERVER}/weather`, {
         method: 'post',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
