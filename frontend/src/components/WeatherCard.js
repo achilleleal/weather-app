@@ -1,47 +1,89 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import ForecastCard from './ForecastCard';
 
 
 class WeatherCard extends Component {
     constructor() {
         super();
         this.state = {
+            loaded: false,
             futureForecast: []
         }
+    }
+
+    componentDidMount() {
+        console.log('fetching');
+        fetch(`${this.props.SERVER}/forecast`, {
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              city: this.props.data.city
+            })
+          })
+          .then(res => res.json())
+          .then(data => {
+            this.setState({futureForecast: data, loaded: true});
+            console.log(data)
+          })
+          .catch(err => console.log(err));
     }
 
 
     // The description is all in lower case. This function capitalizes only the first letter, for formatting
     capitalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1);
 
+
     render() {
         
     const { city, weather, temp, feels_like, icon } = this.props.data;
     const { toMenu } = this.props;
 
+
     return(
         <div>
             <div className="card">
-                <div className="grid grid-cols-1 md:grid-cols-2 card-item mb-2 p-2">
+                <div className="grid grid-cols-1 md:grid-cols-3 card-item mb-2 p-2">
                     <div className="font-bold flex items-center justify-center">
-                        <h1 className="ml-4 text-3xl sm:text-4xl lg:text-5xl">{city}</h1>
+                        <h1 className="md:ml-4 text-3xl sm:text-4xl lg:text-5xl">{city}</h1>
+                    </div>
+                    <div className="flex items-center justify-center">
+                        <div>
+                            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">{temp}º</h1>
+                            <h3 className="text-md sm:text-xl">Feels like {feels_like}º</h3>
+                        </div>
                     </div>
                     <div>
-                        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">{temp}º</h1>
-                        <h3 className="text-md sm:text-xl">Feels like {feels_like}º</h3>
+                        <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} 
+                                                alt=''
+                                                className="w-16 md:w-24 mx-auto"/> 
+                        <h2 className="sm:text-2xl lg:text-3xl">{this.capitalizeFirstLetter(weather)}</h2>
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-4  gap-2">
-                    <div className="card-item">
-                        <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} 
-                                                alt=''
-                                                className="w-24 mx-auto"/> 
-                        <h2 className="sm:text-2xl lg:text-3xl">{this.capitalizeFirstLetter(weather)}</h2>
-                    </div>
-                    <div className="card-item md:col-span-3">
-                        <p>5 day forecast</p>
-                        {}
-                    </div>
+                <div className="card-item p-4">
+                    <h1 className="mb-2 text-xl md:text-3xl">5 day forecast</h1>
+                    {this.state.loaded ?
+
+                        <div className="grid gap-4 grid-cols-2 md:grid-cols-5">
+                            {this.state.futureForecast.map((day, index) => 
+                                <ForecastCard 
+                                    forecast={day.forecast.toLowerCase()}
+                                    date={day.date}
+                                    temp={day.temp}
+                                    feels_like={day.feels_like}
+                                    icon={day.icon}
+                                    className={index === 0 ? 'col-span-2 md:col-span-1' : ''}
+                                    />
+                                    
+                                )
+                            }
+                        </div>
+
+                        :
+
+                        <p>Loading...</p>
+
+                    }
                 </div>
             </div>
             

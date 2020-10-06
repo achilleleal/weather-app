@@ -20,7 +20,7 @@ ONLY use this file to make classes that @apply tailwind classes. All other class
 
 .card {
     @apply bg-white text-center rounded p-2;
-    width: 60vw;
+    width: 0vw;
 }
 
 .card-item {

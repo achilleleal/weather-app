@@ -21,9 +21,11 @@ class App extends Component {
     }
   }
 
+
   toMenu = () => {
     this.setState({loaded: false})
   }
+
 
   getWeather = () => {
     if (this.state.city.trim()) {
@@ -42,7 +44,10 @@ class App extends Component {
     }
   }
 
+
+
   render() {
+
     const { loaded, weatherData } = this.state;
     
     return (
@@ -51,7 +56,7 @@ class App extends Component {
           <div>
             {loaded ? 
                       (weatherData.status ? 
-                        <WeatherCard data={weatherData} toMenu={this.toMenu} />
+                        <WeatherCard data={weatherData} toMenu={this.toMenu} SERVER={SERVER} />
                           :
                         <ErrorCard toMenu={this.toMenu} />
                         )

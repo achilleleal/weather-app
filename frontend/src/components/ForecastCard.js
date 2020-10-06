@@ -1,13 +1,11 @@
 import React from 'react';
 
-const ForecastCard = ({ forecast, date }) => {
+const ForecastCard = ({ forecast, temp, icon, className }) => {
     return (
-        <div className="card">
-            <div className="card-item p-2 text-xl">
-                <h1>{forecast.toUpperCase()}</h1>
-                <img src={require(`../svg/${forecast}.svg`)} className="mx-auto my-4" alt=""/>
-                <h1>{date}</h1>
-            </div>
+        <div className={`mx-auto rounded p-2 bg-purple-900 text-md w-full  ${className}`}>
+            <h1>{forecast.toUpperCase()}</h1>
+            <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} className="mx-auto w-12 md:w-24" alt=""/>
+            <h1>{temp}º</h1>
         </div>
     );
 };
