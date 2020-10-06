@@ -8,6 +8,8 @@ import './styles/styles.css';
 
 // Link where the server is running.
 const SERVER = "http://localhost:3000"
+
+
 class App extends Component {
 
   constructor() {
@@ -48,7 +50,7 @@ class App extends Component {
         <main className="text-center text-white">
           <div>
             {loaded ? 
-                      (weatherData.id ? 
+                      (weatherData.status ? 
                         <WeatherCard data={weatherData} toMenu={this.toMenu} />
                           :
                         <ErrorCard toMenu={this.toMenu} />
