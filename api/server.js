@@ -14,8 +14,8 @@ const API_KEY = process.env.API_KEY;
 
 
 // Request to OWM's "Current Weather" API, using the env's API_KEY and the city name provided by the frontend. Default unit is set to metric
-app.get('/weather', (req, res) => {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=Ho&appid=${API_KEY}&units=metric`)
+app.post('/weather', (req, res) => {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${req.body.city}&appid=${API_KEY}&units=metric`)
     .then(res => res.json())
     .then(data => { 
         // Instead of resending the entire OWM API resp, which contains unnecessary data for the frontend, 
