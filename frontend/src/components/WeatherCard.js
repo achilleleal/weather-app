@@ -1,27 +1,22 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-let degree = "ºC";
 
-const WeatherCard = ({ data, toMenu }) => {
+class WeatherCard extends Component {
+    constructor() {
+        super();
+        this.state = {
+            futureForecast: []
+        }
+    }
 
-    const { city, weather, temp, feels_like, icon } = data;
-
-    // const toFahrenheit = celsius => (celsius * 9/5) + 32;
-
-    // if (data.sys.country === 'US') {
-    //     degree = "ºF";
-    //     temp = toFahrenheit(temp);
-    //     feels_like = toFahrenheit(feels_like);
-    // } else {
-    //     degree = "ºC"
-    // }
 
     // The description is all in lower case. This function capitalizes only the first letter, for formatting
-    const capitalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1);
+    capitalizeFirstLetter = string => string.charAt(0).toUpperCase() + string.slice(1);
 
-    // // Rounds the temperature to have only 1 decimal place
-    // const roundTemp = temperature => Math.round(temperature * 10) / 10;
-
+    render() {
+        
+    const { city, weather, temp, feels_like, icon } = this.props.data;
+    const { toMenu } = this.props;
 
     return(
         <div>
@@ -41,10 +36,11 @@ const WeatherCard = ({ data, toMenu }) => {
                         <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} 
                                                 alt=''
                                                 className="w-24 mx-auto"/> 
-                        <h2 className="sm:text-2xl lg:text-3xl">{capitalizeFirstLetter(weather)}</h2>
+                        <h2 className="sm:text-2xl lg:text-3xl">{this.capitalizeFirstLetter(weather)}</h2>
                     </div>
                     <div className="card-item md:col-span-3">
                         <p>5 day forecast</p>
+                        {}
                     </div>
                 </div>
             </div>
@@ -54,7 +50,7 @@ const WeatherCard = ({ data, toMenu }) => {
             </div>
         </div>
     );
-}
+}}
     
 
 export default WeatherCard;
