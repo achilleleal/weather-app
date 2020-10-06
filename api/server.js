@@ -7,24 +7,43 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+
 // OpenWeatherMap API Key is set in the server's env
 const API_KEY = process.env.API_KEY;
 
-// Makes a request to OpenWeatherMap using the env's API_KEY and the city name provided by the frontend. Default unit is set to metric
-app.post('/weather', (req, res) => {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${req.body.city}&appid=${API_KEY}&units=metric`)
+
+
+// Request to OWM's "Current Weather" API, using the env's API_KEY and the city name provided by the frontend. Default unit is set to metric
+app.get('/weather', (req, res) => {
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=Ho&appid=${API_KEY}&units=metric`)
     .then(res => res.json())
-    .then(data => res.send(data));
-    console.log("Served weather data")
+    .then(data => { 
+        // Instead of resending the entire OWM API resp, which contains unnecessary data for the frontend, 
+        // we send an object that contains only the needed information.
+        const currentWeather = {   
+            status: "OK",
+            city: data.name,
+            weather: data.weather[0].description,
+            temp: data.main.temp,
+            feels_like: data.main.feels_like,
+            icon: data.weather[0].icon,
+        }
+        res.status(200).send(currentWeather);
+        console.log("Served current weather data");    
+    })
+    .catch(err => {
+        res.status(400).send({ error: "There was an error" });
+        console.log(err)
+    });
 })
 
-// Request to OWM's "5 day / 3 hour Forecast" API. Same as req above.
+
+
+// Request to OWM's "5 day / 3 hour Forecast" API. Similar to req above.
 app.post('/forecast', (req, res) => {
     fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${req.body.city}&appid=${API_KEY}&units=metric`)
     .then(res => res.json())
     .then(data =>{
-        // Instead of resending the OWM API resp, which contains unnecessary data for the frontend, 
-        // we send a custom array that contains only the needed information.
         const forecast = [];
         for (let i = 1; i <= 5; i++) {
             // Since the API splits each day in eight 3 hour parts, every 8th item 24 hours pass.
@@ -39,11 +58,16 @@ app.post('/forecast', (req, res) => {
                 }
             )
         }
-        res.send(forecast)
+        res.status(200).send(forecast)
         console.log("Served 5 day forecast data")
     })
-    .catch(console.log);
+    .catch(err => {
+        res.status(400).send("There was an error");
+        console.log(err)
+    });
 })
+
+
 
 const PORT = process.env.PORT;
 
