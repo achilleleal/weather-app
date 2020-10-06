@@ -51,10 +51,9 @@ app.post('/forecast', (req, res) => {
             let day = i * 8 - 1;
             forecast.push(
                 {   
-                    date: data.list[day].dt_txt.split(' ')[0],
-                    weather: data.list[day].weather[0].main,
+                    forecast: data.list[day].weather[0].main,
                     temp: data.list[day].main.temp,
-                    feels_like: data.list[day].main.feels_like,
+                    icon: data.list[day].weather[0].icon,
                 }
             )
         }
