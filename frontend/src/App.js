@@ -38,8 +38,7 @@ class App extends Component {
       })
       .then(res => res.json())
       .then(data => {
-        this.setState({weatherData: data, loaded: true})
-        console.log(this.state.weatherData)
+        this.setState({weatherData: data, loaded: true});
       })
       .catch(err => console.log(err));
     }
