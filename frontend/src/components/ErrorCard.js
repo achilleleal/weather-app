@@ -6,8 +6,8 @@ const ErrorCard = ({ toMenu, error }) =>
         <div className="card" style={{maxWidth: '500px'}}>
             <div className="card-item p-4">
                 <h1 className="text-2xl">Oops, something went wrong.</h1>
+                <img src={rain} alt="" className="w-16 mx-auto my-4" />
                 <p className="error">{error}</p>
-                <img src={rain} alt="" className="w-8 sm:w-16 mx-auto" />
             </div>
         </div>
         <div className="flex">
