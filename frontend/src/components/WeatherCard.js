@@ -81,9 +81,10 @@ class WeatherCard extends Component {
                         </div>
 
                         :
-
-                        <p>Loading...</p>
-
+                        <>
+                            <p>Loading...</p>
+                            <div class="loader mx-auto"></div> 
+                        </>
                     }
                 </div>
             </div>
