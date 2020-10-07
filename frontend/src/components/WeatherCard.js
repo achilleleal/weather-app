@@ -11,8 +11,8 @@ class WeatherCard extends Component {
         }
     }
 
+
     componentDidMount() {
-        console.log('fetching');
         fetch(`${this.props.SERVER}/forecast`, {
             method: 'post',
             headers: {'Content-Type': 'application/json'},
@@ -21,10 +21,7 @@ class WeatherCard extends Component {
             })
           })
           .then(res => res.json())
-          .then(data => {
-            this.setState({futureForecast: data, loaded: true});
-            console.log(data)
-          })
+          .then(data => this.setState({futureForecast: data, loaded: true}))
           .catch(err => console.log(err));
     }
 
@@ -41,7 +38,7 @@ class WeatherCard extends Component {
 
     return(
         <div>
-            <div className="card">
+            <div className="card mt-4 sm:mt-0">
                 <div className="grid grid-cols-1 md:grid-cols-3 card-item mb-2 p-2">
                     <div className="font-bold flex items-center justify-center">
                         <h1 className="md:ml-4 text-3xl sm:text-4xl lg:text-5xl">{city}</h1>
@@ -68,9 +65,7 @@ class WeatherCard extends Component {
                             {this.state.futureForecast.map((day, index) => 
                                 <ForecastCard 
                                     forecast={day.forecast.toLowerCase()}
-                                    date={day.date}
                                     temp={day.temp}
-                                    feels_like={day.feels_like}
                                     icon={day.icon}
                                     className={index === 0 ? 'col-span-2 md:col-span-1' : ''}
                                     />
@@ -87,7 +82,7 @@ class WeatherCard extends Component {
                 </div>
             </div>
             
-            <div>
+            <div className="flex mb-4 sm:mb-0">
                 <button onClick={toMenu} className="button">To menu</button>
             </div>
         </div>

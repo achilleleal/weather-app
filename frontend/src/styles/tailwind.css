@@ -11,7 +11,7 @@ When running "build" or "purge" a purged version of styles.css is made for deplo
 ONLY use this file to make classes that @apply tailwind classes. All other classes go in the App.css*/
 
 .button {
-    @apply px-4 py-2 mt-6 rounded-lg bg-white text-black duration-500 transform;
+    @apply px-4 py-2 mt-8 mx-auto rounded-lg bg-white text-black duration-500 transform;
 }
 
 .button:hover {
@@ -20,13 +20,10 @@ ONLY use this file to make classes that @apply tailwind classes. All other class
 
 .card {
     @apply bg-white text-center rounded p-2;
-    width: 0vw;
+    width: 80vw;
+    max-width: 900px;
 }
 
 .card-item {
     @apply bg-gradient-to-b from-purple-900 to-indigo-600 rounded;
-}
-
-main > div {
-    @apply h-full flex justify-center items-center;
 }

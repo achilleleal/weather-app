@@ -52,20 +52,28 @@ class App extends Component {
     
     return (
       <>
-        <main className="text-center text-white">
+        <main className="flex justify-center items-center">
           <div>
             {loaded ? 
-                      (weatherData.status ? 
-                        <WeatherCard data={weatherData} toMenu={this.toMenu} SERVER={SERVER} />
-                          :
-                        <ErrorCard toMenu={this.toMenu} />
-                        )
+
+                (weatherData.status ? 
+                  <WeatherCard data={weatherData} toMenu={this.toMenu} SERVER={SERVER} />
                     :
-                      <div>
-                        <input type="text" value={this.state.city} onChange={(event) => this.setState({city: event.target.value})} placeholder="Enter a city name" className="py-2 px-4 rounded text-black text-center" />
-                        <img src={sun} className="loading my-6 mx-auto" alt="" />
-                        <button className="button" onClick={this.getWeather}>Get Weather</button>
-                      </div>
+                  <ErrorCard toMenu={this.toMenu} />
+                )
+
+              :
+
+                <div>
+                  <div className="flex">
+                    <input type="text" value={this.state.city} onChange={(event) => this.setState({city: event.target.value})} placeholder="Enter a city name" className="py-2 px-4 mx-auto rounded text-black text-center" />
+                  </div>
+                  <img src={sun} className="spinning-sun my-6 mx-auto" alt="" />
+                  <div className="flex">
+                    <button className="button mx-auto" onClick={this.getWeather}>Get Weather</button>
+                  </div>
+                </div>
+                
             }
           </div>
         </main>
