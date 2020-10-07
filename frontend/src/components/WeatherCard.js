@@ -34,7 +34,7 @@ class WeatherCard extends Component {
         
     const { city, weather, temp, feels_like, icon } = this.props.data;
     const { toMenu } = this.props;
-
+    const { futureForecast, loaded } = this.state;
 
     return(
         <div>
@@ -59,10 +59,16 @@ class WeatherCard extends Component {
 
                 <div className="card-item p-4">
                     <h1 className="mb-2 text-xl md:text-3xl">5 day forecast</h1>
-                    {this.state.loaded ?
+                    {loaded ?
 
                         <div className="grid gap-4 grid-cols-2 md:grid-cols-5">
-                            {this.state.futureForecast.map((day, index) => 
+                            {futureForecast.error ? 
+                            
+                            <p className="error col-span-5">{futureForecast.error}</p>
+                            
+                             :
+                            
+                            futureForecast.map((day, index) => 
                                 <ForecastCard 
                                     forecast={day.forecast.toLowerCase()}
                                     temp={day.temp}

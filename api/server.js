@@ -18,18 +18,22 @@ app.post('/weather', (req, res) => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${req.body.city}&appid=${API_KEY}&units=metric`)
     .then(res => res.json())
     .then(data => { 
-        // Instead of resending the entire OWM API resp, which contains unnecessary data for the frontend, 
-        // we send an object that contains only the needed information.
-        const currentWeather = {   
-            status: "OK",
-            city: data.name,
-            weather: data.weather[0].description,
-            temp: data.main.temp,
-            feels_like: data.main.feels_like,
-            icon: data.weather[0].icon,
-        }
-        res.status(200).send(currentWeather);
-        console.log("Served current weather data");    
+        if (data.cod === '404') {
+            res.status(404).send({ error: "City not found" });
+        } else {
+            // Instead of resending the entire OWM API resp, which contains unnecessary data for the frontend, 
+            // we send an object that contains only the needed information.
+            const currentWeather = {   
+                status: "OK",
+                city: data.name,
+                weather: data.weather[0].description,
+                temp: data.main.temp,
+                feels_like: data.main.feels_like,
+                icon: data.weather[0].icon,
+            }
+            res.status(200).send(currentWeather);
+            console.log("Served current weather data");
+        } 
     })
     .catch(err => {
         res.status(400).send({ error: "There was an error" });
@@ -61,7 +65,7 @@ app.post('/forecast', (req, res) => {
         console.log("Served 5 day forecast data")
     })
     .catch(err => {
-        res.status(400).send("There was an error");
+        res.status(400).send({ error: "There was an error fetching the forecast"});
         console.log(err)
     });
 })

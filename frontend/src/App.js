@@ -39,6 +39,7 @@ class App extends Component {
       .then(res => res.json())
       .then(data => {
         this.setState({weatherData: data, loaded: true})
+        console.log(this.state.weatherData)
       })
       .catch(err => console.log(err));
     }
@@ -59,7 +60,7 @@ class App extends Component {
                 (weatherData.status ? 
                   <WeatherCard data={weatherData} toMenu={this.toMenu} SERVER={SERVER} />
                     :
-                  <ErrorCard toMenu={this.toMenu} />
+                  <ErrorCard toMenu={this.toMenu} error={weatherData.error} />
                 )
 
               :
