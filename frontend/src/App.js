@@ -7,7 +7,7 @@ import './styles/App.css';
 import './styles/styles.css';
 
 // Link where the server is running.
-const SERVER = "http://localhost:3000"
+const SERVER = "http://localhost:4000"
 
 
 class App extends Component {
@@ -52,30 +52,33 @@ class App extends Component {
     
     return (
       <>
-        <main className="flex justify-center items-center">
-          <div>
+        <main className="flex-center flex-col">
             {loaded ? 
-
                 (weatherData.status ? 
-                  <WeatherCard data={weatherData} toMenu={this.toMenu} SERVER={SERVER} />
-                    :
-                  <ErrorCard toMenu={this.toMenu} error={weatherData.error} />
+                    <WeatherCard 
+                      data={weatherData} 
+                      toMenu={this.toMenu} 
+                      SERVER={SERVER} 
+                    />
+                  :
+                    <ErrorCard 
+                      toMenu={this.toMenu} 
+                      error={weatherData.error} 
+                    />
                 )
-
               :
-
-                <div>
-                  <div className="flex">
-                    <input type="text" value={this.state.city} onChange={(event) => this.setState({city: event.target.value})} placeholder="Enter a city name" className="py-2 px-4 mx-auto rounded text-black text-center" />
-                  </div>
-                  <img src={sun} className="spinning-sun my-6 mx-auto" alt="" />
-                  <div className="flex">
+                <>
+                    <input type="text" 
+                      value={this.state.city} 
+                      onChange={(event) => this.setState({city: event.target.value})} 
+                      placeholder="Enter a city name" 
+                      className="py-2 px-4 mx-auto rounded text-black text-center" 
+                    />
+                    <img src={sun} className="spinning-sun my-6 mx-auto" alt="" />
                     <button className="button mx-auto" onClick={this.getWeather}>Get Weather</button>
-                  </div>
-                </div>
+                </>
                 
             }
-          </div>
         </main>
         <Footer />
       </>

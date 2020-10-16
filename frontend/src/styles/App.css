@@ -17,6 +17,12 @@ main {
   }
 }
 
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .spinning-sun {
   height: 20vw;
   min-height: 200px;

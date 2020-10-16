@@ -37,13 +37,15 @@ class WeatherCard extends Component {
     const { futureForecast, loaded } = this.state;
 
     return(
-        <div>
+        <>
             <div className="card mt-4 sm:mt-0">
+
+                {/* Top pane: Current Weather */}
                 <div className="grid grid-cols-1 md:grid-cols-3 card-item mb-2 p-2">
-                    <div className="font-bold flex items-center justify-center">
+                    <div className="flex-center">
                         <h1 className="md:ml-4 text-3xl sm:text-4xl lg:text-5xl">{city}</h1>
                     </div>
-                    <div className="flex items-center justify-center">
+                    <div className="flex-center">
                         <div>
                             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">{temp}º</h1>
                             <h3 className="text-md sm:text-xl">Feels like {feels_like}º</h3>
@@ -57,30 +59,25 @@ class WeatherCard extends Component {
                     </div>
                 </div>
 
+                {/* Bottom pane: 5 day forecast */}
                 <div className="card-item p-4">
                     <h1 className="mb-2 text-xl md:text-3xl">5 day forecast</h1>
                     {loaded ?
-
                         <div className="grid gap-4 grid-cols-2 md:grid-cols-5">
                             {futureForecast.error ? 
-                            
-                            <p className="error col-span-5">{futureForecast.error}</p>
-                            
-                             :
-                            
-                            futureForecast.map((day, index) => 
-                                <ForecastCard 
-                                    forecast={day.forecast.toLowerCase()}
-                                    temp={day.temp}
-                                    icon={day.icon}
-                                    className={index === 0 ? 'col-span-2 md:col-span-1' : ''}
-                                    />
-                                    
+                                <p className="error col-span-5">{futureForecast.error}</p>
+                              :
+                                futureForecast.map((day, index) => 
+                                    <ForecastCard 
+                                        forecast={day.forecast.toLowerCase()}
+                                        temp={day.temp}
+                                        icon={day.icon}
+                                        className={index === 0 ? 'col-span-2 md:col-span-1' : ''}
+                                    />   
                                 )
                             }
                         </div>
-
-                        :
+                      :
                         <>
                             <p>Loading...</p>
                             <div class="loader mx-auto"></div> 
@@ -88,11 +85,9 @@ class WeatherCard extends Component {
                     }
                 </div>
             </div>
-            
-            <div className="flex mb-4 sm:mb-0">
-                <button onClick={toMenu} className="button">To menu</button>
-            </div>
-        </div>
+
+            <button onClick={toMenu} className="button mb-4 sm:mb-0">To menu</button>
+        </>
     );
 }}
     
