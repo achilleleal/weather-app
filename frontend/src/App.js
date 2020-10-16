@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Footer from './components/Footer';
 import WeatherCard from './components/WeatherCard';
 import ErrorCard from './components/ErrorCard';
-import sun from './svg/sun.svg';
+import Menu from './components/Menu';
 import './styles/App.css';
 import './styles/styles.css';
 
@@ -22,9 +22,10 @@ class App extends Component {
   }
 
 
-  toMenu = () => {
-    this.setState({loaded: false})
-  }
+  toMenu = () => this.setState({loaded: false})
+
+
+  setCity = (event) => this.setState({city: event.target.value})
 
 
   getWeather = () => {
@@ -48,7 +49,7 @@ class App extends Component {
 
   render() {
 
-    const { loaded, weatherData } = this.state;
+    const { loaded, weatherData, city } = this.state;
     
     return (
       <>
@@ -67,17 +68,11 @@ class App extends Component {
                     />
                 )
               :
-                <>
-                    <input type="text" 
-                      value={this.state.city} 
-                      onChange={(event) => this.setState({city: event.target.value})} 
-                      placeholder="Enter a city name" 
-                      className="py-2 px-4 mx-auto rounded text-black text-center" 
-                    />
-                    <img src={sun} className="spinning-sun my-6 mx-auto" alt="" />
-                    <button className="button mx-auto" onClick={this.getWeather}>Get Weather</button>
-                </>
-                
+                <Menu 
+                  city={city} 
+                  getWeather={this.getWeather} 
+                  setCity={this.setCity}
+                />
             }
         </main>
         <Footer />
